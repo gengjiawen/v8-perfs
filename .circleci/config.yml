@@ -10,9 +10,11 @@ jobs:
           command: |
             docker pull node:11
             docker pull gcc:8
+            docker pull golang:1.11.2
             docker run --rm --name node11 -v $PWD:/pwd -w /pwd node:11 bash -c "time node ./primes.js"
             docker run --rm --name gcc8-no-optimize -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes && time ./primes"
             docker run --rm --name gcc8-with-O3 -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes -O3 && time ./primes"
+            docker run --rm --name golang1-12 -v $PWD:/pwd -w /pwd golang:1.11.2 bash -c "time go run primes.go"
 
 workflows:
   version: 2
