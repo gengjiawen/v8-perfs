@@ -1,19 +1,19 @@
 version: 2
 jobs:
-    test:
-        machine: true
-        working_directory: ~/project
-        steps:
-            - checkout
-            - run:
-                name: Run Code Perf
-                command: |
-                  docker run --rm --name node11 -v $PWD:/pwd -w /pwd node:11 bash -c "time node ./primes.js"
-                  docker run --rm --name gcc8-no-optimize -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes && time ./primes"
-                  docker run --rm --name gcc8-with-O3 -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes -O3 && time ./primes"
+  test:
+    machine: true
+    working_directory: ~/project
+    steps:
+      - checkout
+      - run:
+          name: Run Code Perf
+          command: |
+            docker run --rm --name node11 -v $PWD:/pwd -w /pwd node:11 bash -c "time node ./primes.js"
+            docker run --rm --name gcc8-no-optimize -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes && time ./primes"
+            docker run --rm --name gcc8-with-O3 -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes -O3 && time ./primes"
 
 workflows:
-    version: 2
-    perfs:
-        jobs:
-            - test
+  version: 2
+  perfs:
+    jobs:
+      - test
