@@ -1,0 +1,14 @@
+version: 2
+jobs:
+    test:
+        machine: true
+        working_directory: ~/project
+        steps:
+            - checkout
+            - run: echo "helo"
+
+workflows:
+    version: 2
+    one_and_two:
+        jobs:
+            - test
