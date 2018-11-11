@@ -6,7 +6,7 @@ function Primes() {
   this.addPrime = i => (this.primes[this.prime_count++] = i)
   this.isPrimeDivisible = candidate => {
     for (let i = 1; i < this.prime_count; ++i) {
-      if (candidate % this.primes[i] == 0) {
+      if (candidate % this.primes[i] === 0) {
         return true
       }
     }

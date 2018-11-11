@@ -8,6 +8,8 @@ jobs:
       - run:
           name: Run Code Perf
           command: |
+            docker pull node:11
+            docker pull gcc:8
             docker run --rm --name node11 -v $PWD:/pwd -w /pwd node:11 bash -c "time node ./primes.js"
             docker run --rm --name gcc8-no-optimize -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes && time ./primes"
             docker run --rm --name gcc8-with-O3 -v $PWD:/pwd -w /pwd gcc:8 bash -c "g++ ./primes.cc -o primes -O3 && time ./primes"
